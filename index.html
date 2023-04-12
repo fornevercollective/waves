@@ -1,42 +1,66 @@
+<!--
+Test
+Copyright
+Released under the MIT license
+-->
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Ocean Wave Simulation</title>
-
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href="waves.css" rel="stylesheet" type="text/css">
-    </head>
-
-    <body>
-        <div id="overlay"></div>
-        <div id="ui">
-            <div id="camera">
-                <canvas id="profile" width="350" height="105"></canvas>
-                <div id="length"></div>
-                <div id="end"></div>
-                <div id="wind">
-                    <span id="wind-speed"></span><span id="wind-unit"> m/s</span>
-                    <div id="wind-label">WIND</div>
-                </div>
-
-                <div id="size">
-                    <span id="size-value"></span><span id="size-unit"> m</span>
-                </div>
-                <div id="size-label">SIZE</div>
-                <div id="choppiness"></div>
-                <div id="choppiness-label">CHOPPINESS</div>
-            </div>
-        </div>
-        <canvas id="simulator"></canvas>
-
-        <div id="error">Your browser does not appear to support the required technologies. You can still view this on <a href="http://youtu.be/IrUehq6vJss">YouTube</a>.</div>
-
-        <div id="footer"><a href="http://david.li">David.Li</a> | <a href="http://youtu.be/IrUehq6vJss">Video</a></div>
-
-        <script src="shared.js"></script>
-        <script src="simulation.js"></script>
-        <script src="ui.js"></script>
-        <script src="waves.js"></script>
-    </body>
-</html>
+<html><head>
+  <meta charset="utf8">
+  <title>Water</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <script src="./02/OES_texture_float_linear-polyfill.js"></script>
+  <script src="./02/lightgl.js"></script>
+  <script src="./02/cubemap.js"></script>
+  <script src="./02/renderer.js"></script>
+  <script src="./02/water.js"></script>
+  <script src="./02/main.js"></script>
+  <style type="text/css">
+    body { font: 13px/140% Arial, sans-serif; background: black; color: white; overflow: hidden; }
+    a { color: inherit; cursor: pointer; }
+    img { display: none; }
+    ul { padding: 0 0 0 20px; }
+    h1 { font: bold italic 30px/30px Georgia; text-align: center; }
+    h2 { font: bold italic 17px/17px Georgia; padding-top: 10px; }
+    small { display: block; font-size: 11px; line-height: 15px; }
+    canvas { position: absolute; top: 0; left: 0; }
+    #help { position: absolute; top: 0; right: 0; bottom: 0; width: 280px; padding-right: 20px; overflow: auto; }
+    #loading { position: absolute; left: 0; top: 50%; right: 300px; text-align: center; margin-top: -8px; }
+    @media (max-width: 600px) {
+      small { font-size: 8px; line-height: 10px; }
+      #help { width: 100px; font-size: 10px; line-height: 12px; }
+    }
+  </style>
+</head><body>
+  <div id="loading">Loading...</div>
+  <div id="help">
+    <h1>WebGL Water</h1>
+    <p>Made by <a href="https://madebyevan.com/">Evan Wallace</a></p>
+    <p>This demo requires a decent graphics card and up-to-date drivers. If you can't run the demo, you can still <a href="https://youtube.com/watch?v=R0O_9bp3EKQ">see it on YouTube</a>.</p>
+    <h2>Interactions:</h2>
+    <ul>
+      <li>Draw on the water to make ripples</li>
+      <li>Drag the background to rotate the camera</li>
+      <li>Press SPACEBAR to pause and unpause</li>
+      <li>Drag the sphere to move it around</li>
+      <li>Press the L key to set the light direction</li>
+      <li>Press the G key to toggle gravity</li>
+    </ul>
+    <h2>Features:</h2>
+    <ul>
+      <li>Raytraced reflections and refractions</li>
+      <li>Analytic ambient occlusion</li>
+      <li>Heightfield water simulation *</li>
+      <li>Soft shadows</li>
+      <li>Caustics (see <a href="https://medium.com/@evanwallace/rendering-realtime-caustics-in-webgl-2a99a29a0b2c">this</a> for details) **</li>
+    </ul>
+    <p><small>* requires the OES_texture_float extension<br>** requires the OES_standard_derivatives extension</small></p>
+    <p><small>Tile texture from <a href="https://www.flickr.com/photos/zooboing/3682834083/">zooboing</a> on Flickr</small></p>
+  </div>
+  <img id="tiles" src="./02/tiles.jpg">
+  <img id="xneg" src="./02/xneg.jpg">
+  <img id="xpos" src="./02/xpos.jpg">
+  <img id="ypos" src="./02/ypos.jpg">
+  <img id="zneg" src="./02/zneg.jpg">
+  <img id="zpos" src="./02/zpos.jpg">
+</body></html>
