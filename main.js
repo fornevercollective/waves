@@ -165,7 +165,7 @@ window.onload = function() {
       case MODE_ORBIT_CAMERA: {
         angleY -= x - oldX;
         angleX -= y - oldY;
-        angleX = Math.max(-0, Math.min(-20, angleX));
+        angleX = Math.max(-89.999, Math.min(89.999, angleX));
         break;
       }
     }
